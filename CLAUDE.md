@@ -20,6 +20,12 @@ Three files; all game logic lives in `game.js` (single script, global state, no 
 - Flow: `loop` (requestAnimationFrame, accumulates `dropAccum` against `dropInterval`) → `lockPiece` = `merge` → `clearLines` → `spawn`. `spawn` ends the game via `endGame` if the new piece collides.
 - Input is a single `keydown` listener; pausing and game over are guarded by the `paused`/`gameOver` flags, and the rAF loop is cancelled (not just skipped) on pause and game over.
 
+## Skins (drawing)
+
+- `SKINS` in `game.js` = `{retro, neon, pastel, pixel}`; each has `colors[8]`, `background`, `grid` and `drawBlock(ctx, px, py, size, color, alpha)` (pixel coordinates). `drawBlock(context, x, y, colorIndex, size, alpha)` delegates to `currentSkin`; `COLORS` is the active palette.
+- `applyVisuals()` recomputes `COLORS`, grid color, canvas background (`style.background`) and redraws; called by `applySkin` and `applyTheme`. Retro follows the light/dark theme palette; the other skins are theme-independent.
+- Persisted in `localStorage` key `tetris.skin` (try/catch, falls back to retro). Skins using `shadowBlur` must reset it after drawing. `<select id="skin-select">` is blurred after change so arrow keys don't alter it.
+
 ## Gotchas
 
 - Changing `COLS`, `ROWS` or `BLOCK` requires updating the `width`/`height` attributes of `<canvas id="board">` in `index.html` manually.

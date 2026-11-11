@@ -86,6 +86,8 @@ Después abre `http://localhost:8000` en el navegador.
 | `Espacio` | Hard drop (caída instantánea)     |
 | `P`       | Pausar / reanudar                 |
 
+**Skins:** el selector "SKIN" del panel lateral cambia el aspecto de los bloques al instante (Retro, Neón, Pastel y Pixel art), incluso en pausa. La elección se guarda en `localStorage` (`tetris.skin`). El skin Retro respeta el tema claro/oscuro; los demás usan su propio fondo.
+
 **Tema claro/oscuro:** el botón "Modo claro / Modo oscuro" del panel lateral alterna el tema. Por defecto el juego inicia en modo oscuro; la elección se guarda en `localStorage`.
 
 ---
