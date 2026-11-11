@@ -17,6 +17,7 @@ Three files; all game logic lives in `game.js` (single script, global state, no 
 - `index.html` defines `#board` (300×600 canvas), `#next-canvas` (120×120), HUD elements (`#score`, `#lines`, `#level`) and `#overlay` (used for both PAUSA and GAME OVER). `game.js` fetches these by id at load, so renaming ids breaks it.
 - `game.js` state is a set of top-level `let` variables (`board`, `current`, `next`, `score`, `lines`, `level`, `paused`, `gameOver`, `dropInterval`, ...) reset in `init()`, which is also the restart-button handler.
 - Board is a `ROWS×COLS` matrix of 0 or a piece type index 1–7, which indexes both `COLORS` and `PIECES`. Piece cells hold their own type index, so shapes are matrices of 0/type.
+- The game does not auto-start: on load `showStartScreen()` shows the records overlay and the restart button (labelled "Jugar") calls `init()`. Records live in localStorage (`tetris.highscores`, `tetris.bestCombo`, `tetris.maxLines`); combo is tracked in `clearLines`.
 - Flow: `loop` (requestAnimationFrame, accumulates `dropAccum` against `dropInterval`) → `lockPiece` = `merge` → `clearLines` → `spawn`. `spawn` ends the game via `endGame` if the new piece collides.
 - Input is a single `keydown` listener; pausing and game over are guarded by the `paused`/`gameOver` flags, and the rAF loop is cancelled (not just skipped) on pause and game over.
 

@@ -42,6 +42,8 @@ Es una versión jugable del Tetris clásico con todas las mecánicas que esperar
 - **Sistema de puntuación** clásico de Tetris (100 / 300 / 500 / 800 multiplicado por nivel).
 - **Niveles** que aumentan cada 10 líneas y aceleran la caída.
 - **Pausa** y **Game Over** con opción de reinicio.
+- **Pantalla de inicio** con la tabla de records y botón **Jugar** (el juego ya no arranca solo).
+- **Tabla de records local** (top 5) guardada en `localStorage`, con **combo** (líneas consecutivas) y máximo de líneas.
 
 ---
 
@@ -87,6 +89,14 @@ Después abre `http://localhost:8000` en el navegador.
 | `P`       | Pausar / reanudar                 |
 
 **Tema claro/oscuro:** el botón "Modo claro / Modo oscuro" del panel lateral alterna el tema. Por defecto el juego inicia en modo oscuro; la elección se guarda en `localStorage`.
+
+### Records
+
+- Claves de `localStorage`: `tetris.highscores` (top 5 con `{name, score, lines, level, date}`), `tetris.bestCombo` y `tetris.maxLines`.
+- Al terminar la partida, si la puntuación entra al top 5 se pide un nombre (máx. 12 caracteres) y se resalta la fila nueva; si no, se muestra la tabla con un aviso.
+- El **combo** cuenta bloqueos de pieza consecutivos que eliminan líneas; se reinicia con un bloqueo que no elimina ninguna.
+- El botón **Borrar records** (con confirmación) elimina todo lo guardado.
+- Mientras el campo de nombre tiene el foco, las teclas de juego y `P` se ignoran.
 
 ---
 
